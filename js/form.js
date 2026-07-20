@@ -62,7 +62,7 @@
   });
   form.addEventListener('input', (e) => {
     const t = e.target;
-    if (t === form.sender_name || t === form.recipient_name) {
+    if (t === form.organization || t === form.sender_name || t === form.recipient_name) {
       t.closest('.form-group')?.classList.remove('is-invalid');
     }
   });

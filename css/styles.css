@@ -1107,8 +1107,7 @@ body {
 }
 
 .success-card p {
-  color: var(--color-muted);
-  font-size: 1.02rem;
+  font-size: 1.2rem;
   max-width: 480px;
   margin: 0 auto var(--space-6);
   line-height: 1.7;
@@ -3359,7 +3358,7 @@ body.is-locked .login-screen {
 
 .pro-card__value {
   display: inline-block;
-  background: var(--color-teal);
+  background: var(--color-orange);
   color: #ffffff;
   font-size: 0.82rem;
   font-weight: 700;
