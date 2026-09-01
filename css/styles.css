@@ -3528,3 +3528,597 @@ body.is-locked .login-screen {
   .pro-card__headline { font-size: 1.15rem; }
   .pro-card__to-name { font-size: 1.3rem; }
 }
+
+/* ============================================================
+   حالات الاستبيان — التحميل / الخطأ / الإغلاق
+   ============================================================ */
+
+.survey-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  text-align: center;
+  padding-block: var(--space-12);
+}
+
+.survey-state__spinner {
+  width: 38px;
+  height: 38px;
+  border: 3px solid var(--color-teal-100);
+  border-top-color: var(--color-teal);
+  border-radius: 50%;
+  animation: survey-spin 0.75s linear infinite;
+}
+
+@keyframes survey-spin {
+  to { transform: rotate(360deg); }
+}
+
+.survey-state__text {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  line-height: 1.8;
+  max-width: 46ch;
+}
+
+/* الحالة النهائية (خطأ أو إغلاق): لا دوران — أيقونة ساكنة */
+.survey-state.is-error .survey-state__spinner,
+.survey-state.is-done  .survey-state__spinner {
+  animation: none;
+  border-color: var(--color-line);
+}
+
+.survey-state.is-error .survey-state__text {
+  color: var(--color-error);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .survey-state__spinner { animation: none; }
+}
+
+/* ============================================================
+   احترام سمة hidden مهما كانت قيمة display في الفئة
+   (بدونها تتغلّب قواعد مثل .survey-state{display:flex} على [hidden])
+   ============================================================ */
+[hidden] { display: none !important; }
+
+/* ============================================================
+   باني الاستبيانات
+   ============================================================ */
+
+.sv-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.sv-bar__meta {
+  font-size: 0.86rem;
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+/* ===== قائمة الاستبيانات ===== */
+.sv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-5);
+}
+
+.sv-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  transition: all var(--duration) var(--ease-out);
+}
+
+.sv-card:hover {
+  border-color: var(--color-teal-200);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.sv-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.sv-card__slug {
+  font-size: 0.76rem;
+  color: var(--color-muted-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 55%;
+}
+
+.sv-card__title {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  line-height: 1.5;
+}
+
+.sv-card__desc {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 1.2em;
+}
+
+.sv-card__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--color-line);
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.sv-card__stats strong {
+  color: var(--color-teal-800);
+  font-variant-numeric: tabular-nums;
+}
+
+.sv-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.sv-card__actions button {
+  flex: 1;
+  min-width: 72px;
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-teal-800);
+  background: var(--color-teal-50);
+  border: 1px solid var(--color-teal-100);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--duration) var(--ease-out);
+}
+
+.sv-card__actions button:hover {
+  background: var(--color-teal);
+  border-color: var(--color-teal);
+  color: var(--color-white);
+}
+
+.sv-card__actions button.is-danger {
+  color: var(--color-error);
+  background: var(--color-error-bg);
+  border-color: var(--color-orange-100);
+}
+
+.sv-card__actions button.is-danger:hover {
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: var(--color-white);
+}
+
+/* ===== شارات الحالة ===== */
+.sv-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.74rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sv-badge--draft  { background: var(--color-canvas);      color: var(--color-muted);      border: 1px solid var(--color-line); }
+.sv-badge--active { background: var(--color-teal-50);     color: var(--color-teal-800);   border: 1px solid var(--color-teal-200); }
+.sv-badge--closed { background: var(--color-orange-50);   color: var(--color-orange);     border: 1px solid var(--color-orange-100); }
+
+/* ===== لوحات المحرّر ===== */
+.sv-panel { margin-bottom: var(--space-5); }
+
+.sv-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-5);
+}
+
+.sv-panel__title {
+  margin: 0 0 var(--space-5);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-teal-800);
+}
+
+.sv-panel__head .sv-panel__title { margin-bottom: 0; }
+
+.sv-link {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  color: var(--color-teal-800);
+  word-break: break-all;
+}
+
+.sv-warn {
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-5);
+  background: var(--color-orange-50);
+  border: 1px solid var(--color-orange-100);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--color-ink-soft);
+}
+
+.sv-warn strong { color: var(--color-orange); }
+.sv-warn em     { font-style: normal; font-weight: 700; color: var(--color-teal-800); }
+
+.sv-actions {
+  position: sticky;
+  bottom: 0;
+  padding: var(--space-4) 0;
+  background: linear-gradient(to top, var(--color-bg) 55%, transparent);
+}
+
+.sv-empty {
+  padding: var(--space-12) var(--space-5);
+  text-align: center;
+  color: var(--color-muted);
+  font-weight: 600;
+  background: var(--color-white);
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-lg);
+}
+
+/* ===== بطاقة السؤال ===== */
+.q-item {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-3);
+  background: var(--color-white);
+  overflow: hidden;
+}
+
+.q-item__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-canvas);
+}
+
+.q-item__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-teal-50);
+  border: 1.5px solid var(--color-teal-200);
+  color: var(--color-teal-800);
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.q-item__label {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  font-size: 0.94rem;
+  color: var(--color-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.q-item__label em { color: var(--color-muted-soft); font-style: italic; font-weight: 500; }
+
+.q-item__type {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.q-item__actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.q-item__actions button {
+  padding: 5px 10px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: all var(--duration) var(--ease-out);
+}
+
+.q-item__actions button:hover:not(:disabled) {
+  border-color: var(--color-teal);
+  color: var(--color-teal-800);
+  background: var(--color-teal-50);
+}
+
+.q-item__actions button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.q-item__actions button.is-danger:hover:not(:disabled) {
+  border-color: var(--color-error);
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+.q-item__body {
+  padding: var(--space-5) var(--space-4) var(--space-3);
+  border-top: 1px solid var(--color-line);
+}
+
+.q-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.q-required { display: flex; align-items: flex-end; }
+
+.q-check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 13px var(--space-4);
+  border: 1.5px solid var(--color-line);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+  user-select: none;
+  width: 100%;
+}
+
+.q-check:has(input:checked) {
+  border-color: var(--color-teal);
+  background: var(--color-teal-50);
+  color: var(--color-teal-800);
+}
+
+.q-check input { width: 18px; height: 18px; accent-color: var(--color-teal); cursor: pointer; }
+
+@media (max-width: 640px) {
+  .q-row { grid-template-columns: 1fr; }
+
+  .q-item__head { flex-wrap: wrap; }
+  .q-item__label { flex-basis: 100%; order: 3; white-space: normal; }
+  .q-item__actions { margin-inline-start: auto; }
+
+  .sv-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   عرض ردود الاستبيانات
+   ============================================================ */
+
+.rs-picker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-5);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.rs-picker__label {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--color-teal-800);
+  flex-shrink: 0;
+}
+
+.rs-picker select {
+  flex: 1;
+  min-width: 200px;
+  max-width: 480px;
+}
+
+.rs-picker__meta {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  flex-shrink: 0;
+}
+
+/* ===== لوحة تحليل الأسئلة ===== */
+.qa-panel { margin-bottom: var(--space-5); }
+
+.qa-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-5);
+}
+
+.qa-panel__head .sv-panel__title { margin-bottom: 0; }
+
+.qa-item {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-3);
+  overflow: hidden;
+}
+
+.qa-item__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-canvas);
+}
+
+.qa-item__label {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  font-size: 0.94rem;
+  color: var(--color-ink);
+}
+
+.qa-item__label em,
+.qa-row__label em {
+  font-style: normal;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-orange);
+}
+
+.qa-item__n {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-teal-800);
+  font-variant-numeric: tabular-nums;
+}
+
+.qa-item__body { padding: var(--space-4); }
+
+.qa-avg {
+  margin-bottom: var(--space-3);
+  font-size: 0.88rem;
+  color: var(--color-muted);
+}
+
+.qa-avg strong {
+  color: var(--color-teal-800);
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.qa-row {
+  display: grid;
+  grid-template-columns: minmax(90px, 1.4fr) 3fr minmax(74px, auto);
+  align-items: center;
+  gap: var(--space-3);
+  padding: 5px 0;
+}
+
+.qa-row__label {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.qa-bar {
+  display: block;
+  height: 9px;
+  border-radius: var(--radius-pill);
+  background: var(--color-canvas);
+  overflow: hidden;
+}
+
+.qa-bar__fill {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--color-teal) 0%, var(--color-teal-700) 100%);
+}
+
+.qa-row__val {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+  text-align: start;
+}
+
+/* ===== الدرج: إجابة نصية ===== */
+.drawer-qa__a {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.8;
+}
+
+.drawer-qa__empty {
+  font-size: 0.88rem;
+  color: var(--color-muted-soft);
+  font-style: italic;
+}
+
+.drawer-section__title em {
+  font-style: normal;
+  font-size: 0.74rem;
+  color: var(--color-orange);
+}
+
+@media (max-width: 640px) {
+  .qa-row { grid-template-columns: 1fr; gap: 4px; }
+  .qa-row__label { white-space: normal; }
+  .rs-picker select { max-width: none; }
+}
+
+/* ===== لوحة البطاقة في الباني ===== */
+.sv-card-toggle { width: auto; flex-shrink: 0; }
+
+.sv-card-hint {
+  margin-top: 0;
+  margin-bottom: var(--space-5);
+  line-height: 1.9;
+}
+
+.sv-subhead {
+  margin: var(--space-5) 0 var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--color-line);
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--color-teal-800);
+}
+
+/* أزرار البطاقة المخفية لا تُبقي فراغاً في شبكة الإجراءات */
+.card-actions button[hidden] { display: none !important; }
