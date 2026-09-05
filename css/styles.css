@@ -46,32 +46,37 @@
   font-style: normal;
   font-display: swap;
 }
-
 :root {
-  /* لوحة الألوان الأساسية */
-  --color-white: #ffffff;
+  /* الوضع الداكن هو الوضع الوحيد للموقع */
+  color-scheme: dark;
+
+  /* لوحة الألوان الأساسية (ألوان الهوية تبقى كما هي) */
+  --color-on-accent: #ffffff;   /* نص فوق الأزرار والألوان المميّزة */
   --color-orange: #f59c00;
   --color-yellow: #ffce00;
   --color-teal: #00aa80;
 
-  /* درجات مشتقّة لتحقيق عمق بصري */
-  --color-teal-50:  #f0faf6;
-  --color-teal-100: #d9f2e8;
-  --color-teal-200: #a8e1ce;
-  --color-teal-700: #007a5c;
-  --color-teal-800: #005840;
-  --color-orange-50:  #fff7e6;
-  --color-orange-100: #ffead0;
-  --color-yellow-50:  #fffaf0;
+  /* درجات مشتقّة لتحقيق عمق بصري (مقلوبة للوضع الداكن) */
+  --color-teal-50:  #0e2320;   /* أخفت خلفية مائلة للأخضر */
+  --color-teal-100: #14352c;   /* خلفية/حدود ناعمة */
+  --color-teal-200: #1f5646;   /* حدود واضحة */
+  --color-teal-700: #5fd9b5;   /* نص أخضر ثانوي */
+  --color-teal-800: #8cebd1;   /* نص أخضر بارز */
+  --color-teal-grad: #007a5c;  /* الطرف الداكن لتدرّجات الأزرار */
+  --color-orange-50:  #2b1d06;
+  --color-orange-100: #402c0c;
+  --color-yellow-50:  #2a2206;
 
-  /* محايدات منضبطة */
-  --color-ink:        #0f1c1a;
-  --color-ink-soft:   #2a3937;
-  --color-muted:      #5a6b68;
-  --color-muted-soft: #8a9794;
-  --color-line:       #e7ecea;
-  --color-line-soft:  #f1f4f3;
-  --color-canvas:     #fafbfb;
+  /* محايدات منضبطة (داكنة) */
+  --color-ink:        #f2f6f5;  /* أقوى نص */
+  --color-ink-soft:   #dae3e1;  /* نص المتن */
+  --color-muted:      #9aa8a5;
+  --color-muted-soft: #71807d;
+  --color-line:       #24312e;
+  --color-line-soft:  #1a2422;
+  --color-canvas:     #0a1211;  /* خلفية الصفحة */
+  --color-surface:    #111d1b;  /* خلفية البطاقات والحقول */
+  --color-toast-bg:   #1d2b28;
 
   /* تطبيقات الألوان */
   --color-primary: var(--color-teal);
@@ -81,7 +86,7 @@
   --color-secondary-dark: var(--color-orange);
   --color-accent: var(--color-yellow);
   --color-bg: var(--color-canvas);
-  --color-card: var(--color-white);
+  --color-card: var(--color-surface);
   --color-text: var(--color-ink-soft);
   --color-text-light: var(--color-muted);
   --color-border: var(--color-line);
@@ -89,20 +94,22 @@
   --color-error-bg: var(--color-orange-50);
   --color-success: var(--color-teal);
   --color-success-bg: var(--color-teal-50);
+  --color-danger:      #ff6b6b;
+  --color-danger-line: #5c2020;
 
-  /* ظلال متعدّدة الطبقات (تعطي إحساس عمق احترافي) */
-  --shadow-xs: 0 1px 2px rgba(15, 28, 26, 0.04);
-  --shadow-sm: 0 1px 2px rgba(15, 28, 26, 0.04),
-               0 2px 4px rgba(15, 28, 26, 0.03);
-  --shadow-md: 0 2px 4px rgba(15, 28, 26, 0.04),
-               0 8px 16px -4px rgba(15, 28, 26, 0.06);
-  --shadow-lg: 0 4px 8px rgba(15, 28, 26, 0.04),
-               0 16px 40px -8px rgba(15, 28, 26, 0.10),
-               0 1px 0 rgba(255, 255, 255, 0.6) inset;
-  --shadow-xl: 0 8px 16px rgba(15, 28, 26, 0.05),
-               0 32px 64px -16px rgba(15, 28, 26, 0.14);
-  --shadow-focus: 0 0 0 4px rgba(0, 170, 128, 0.18);
-  --shadow-focus-warm: 0 0 0 4px rgba(245, 156, 0, 0.20);
+  /* ظلال متعدّدة الطبقات (معتمة أكثر لتناسب الخلفية الداكنة) */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.40);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40),
+               0 2px 4px rgba(0, 0, 0, 0.32);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.40),
+               0 8px 16px -4px rgba(0, 0, 0, 0.46);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.44),
+               0 16px 40px -8px rgba(0, 0, 0, 0.55),
+               0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  --shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.48),
+               0 32px 64px -16px rgba(0, 0, 0, 0.62);
+  --shadow-focus: 0 0 0 4px rgba(0, 170, 128, 0.35);
+  --shadow-focus-warm: 0 0 0 4px rgba(245, 156, 0, 0.32);
 
   /* انحناءات دقيقة */
   --radius-xs: 6px;
@@ -148,8 +155,8 @@ html {
 body {
   font-family: var(--font-family);
   background:
-    radial-gradient(1200px 600px at 50% -200px, rgba(0, 170, 128, 0.08), transparent 60%),
-    radial-gradient(900px 500px at 100% 0%, rgba(245, 156, 0, 0.05), transparent 55%),
+    radial-gradient(1200px 600px at 50% -200px, rgba(0, 170, 128, 0.14), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(245, 156, 0, 0.09), transparent 55%),
     var(--color-canvas);
   color: var(--color-text);
   line-height: 1.75;
@@ -172,7 +179,7 @@ body {
 
 .site-header {
   background:
-    linear-gradient(180deg, var(--color-white) 0%, var(--color-teal-50) 100%);
+    linear-gradient(180deg, var(--color-surface) 0%, var(--color-teal-50) 100%);
   color: var(--color-text);
   padding: var(--space-12) var(--space-5) var(--space-16);
   text-align: center;
@@ -186,8 +193,8 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(ellipse 600px 280px at 18% 20%, rgba(255, 206, 0, 0.10), transparent 60%),
-    radial-gradient(ellipse 700px 320px at 82% 75%, rgba(0, 170, 128, 0.10), transparent 60%);
+    radial-gradient(ellipse 600px 280px at 18% 20%, rgba(255, 206, 0, 0.09), transparent 60%),
+    radial-gradient(ellipse 700px 320px at 82% 75%, rgba(0, 170, 128, 0.13), transparent 60%);
   pointer-events: none;
 }
 
@@ -227,7 +234,7 @@ body {
   letter-spacing: 1.6px;
   text-transform: uppercase;
   padding: 6px 14px;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-teal-200);
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-xs);
@@ -241,7 +248,7 @@ body {
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--color-orange);
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-orange-100);
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-xs);
@@ -339,8 +346,8 @@ body {
 }
 
 .header-action--primary {
-  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-700) 100%);
-  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-grad) 100%);
+  color: var(--color-on-accent);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.18) inset,
     0 4px 10px -2px rgba(0, 170, 128, 0.35);
@@ -355,7 +362,7 @@ body {
 }
 
 .header-action--ghost {
-  background: var(--color-white);
+  background: var(--color-surface);
   color: var(--color-teal-800);
   /* الحدود عبر inset box-shadow بدل border حتى لا تؤثّر على الأبعاد */
   box-shadow:
@@ -378,7 +385,7 @@ body {
 .header-action:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 3px var(--color-white),
+    0 0 0 3px var(--color-surface),
     0 0 0 5px var(--color-teal);
 }
 
@@ -408,12 +415,12 @@ body {
   align-items: center;
   gap: var(--space-2);
   padding: 12px var(--space-5);
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--color-toast-bg);
+  color: var(--color-on-accent);
   border-radius: var(--radius-pill);
   font-size: 0.92rem;
   font-weight: 600;
-  box-shadow: 0 8px 24px rgba(15, 28, 26, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
   opacity: 0;
   transition: transform 0.4s var(--ease-spring),
               opacity 0.3s var(--ease-out);
@@ -433,7 +440,7 @@ body {
 }
 
 .toast--success {
-  background: var(--color-teal-800);
+  background: var(--color-teal-grad);
 }
 
 .toast--success svg {
@@ -493,7 +500,7 @@ body {
 
 .info-box {
   position: relative;
-  background: linear-gradient(135deg, var(--color-teal-50) 0%, var(--color-white) 100%);
+  background: linear-gradient(135deg, var(--color-teal-50) 0%, var(--color-surface) 100%);
   border: 1px solid var(--color-teal-100);
   border-radius: var(--radius-lg);
   padding: var(--space-6) var(--space-6) var(--space-6) var(--space-8);
@@ -609,7 +616,7 @@ body {
 
 .form-group:focus-within .form-label .question-number {
   background: var(--color-teal);
-  color: var(--color-white);
+  color: var(--color-on-accent);
   border-color: var(--color-teal);
   transform: scale(1.05);
 }
@@ -621,9 +628,9 @@ body {
   border-radius: var(--radius-md);
   font-family: var(--font-family);
   font-size: 1rem;
-  background: var(--color-white);
+  background: var(--color-surface);
   color: var(--color-ink);
-  box-shadow: 0 1px 2px rgba(15, 28, 26, 0.03) inset;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28) inset;
   transition: border-color var(--duration) var(--ease-out),
               box-shadow var(--duration) var(--ease-out),
               background-color var(--duration) var(--ease-out);
@@ -636,9 +643,9 @@ body {
 .form-input:focus {
   outline: none;
   border-color: var(--color-teal);
-  background: var(--color-white);
+  background: var(--color-surface);
   box-shadow: var(--shadow-focus),
-              0 1px 2px rgba(15, 28, 26, 0.03) inset;
+              0 1px 2px rgba(0, 0, 0, 0.28) inset;
 }
 
 .form-input::placeholder {
@@ -661,7 +668,7 @@ body {
   align-items: center;
   gap: var(--space-3);
   padding: 14px var(--space-4);
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1.5px solid var(--color-line);
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -688,7 +695,7 @@ body {
   height: 22px;
   border: 1.5px solid var(--color-muted-soft);
   border-radius: 7px;
-  background: var(--color-white);
+  background: var(--color-surface);
   cursor: pointer;
   flex-shrink: 0;
   position: relative;
@@ -768,7 +775,7 @@ body {
 .form-select {
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235a6b68' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa8a5' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
   background-repeat: no-repeat;
   background-position: left var(--space-4) center;
   background-size: 18px;
@@ -845,7 +852,7 @@ body {
   width: 20px;
   height: 20px;
   border-radius: var(--radius-pill);
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-teal-200);
   color: var(--color-teal-800);
   font-size: 0.72rem;
@@ -858,7 +865,7 @@ body {
   padding: var(--space-4);
   border: 1.5px solid var(--color-line);
   border-radius: var(--radius-md);
-  background: var(--color-white);
+  background: var(--color-surface);
   margin-bottom: var(--space-3);
   transition: border-color var(--duration) var(--ease-out),
               background-color var(--duration) var(--ease-out),
@@ -929,7 +936,7 @@ body {
   min-height: 46px;
   border: 1.5px solid var(--color-line);
   border-radius: var(--radius-sm);
-  background: var(--color-white);
+  background: var(--color-surface);
   color: var(--color-ink-soft);
   font-weight: 700;
   font-size: 1rem;
@@ -946,7 +953,7 @@ body {
 .rating-option input:checked + .rating-option__num {
   background: var(--color-teal);
   border-color: var(--color-teal);
-  color: var(--color-white);
+  color: var(--color-on-accent);
   box-shadow: 0 4px 12px -2px rgba(0, 170, 128, 0.45);
   transform: translateY(-1px);
 }
@@ -972,8 +979,8 @@ body {
   position: relative;
   width: 100%;
   padding: 18px var(--space-6);
-  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-700) 100%);
-  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-grad) 100%);
+  color: var(--color-on-accent);
   border: none;
   border-radius: var(--radius-md);
   font-family: var(--font-family);
@@ -1026,7 +1033,7 @@ body {
 .submit-button:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 4px var(--color-white),
+    0 0 0 4px var(--color-surface),
     0 0 0 7px var(--color-teal),
     0 6px 16px -4px rgba(0, 170, 128, 0.45);
 }
@@ -1057,7 +1064,7 @@ body {
 
 .alert-error {
   background: var(--color-orange-50);
-  color: #8a4f00;
+  color: #f0b45c;
   border-color: var(--color-orange-100);
 }
 
@@ -1072,7 +1079,7 @@ body {
   padding: var(--space-16) var(--space-8);
   background:
     radial-gradient(ellipse 400px 200px at 50% 0%, var(--color-teal-50), transparent 70%),
-    var(--color-white);
+    var(--color-surface);
 }
 
 .success-card .success-icon {
@@ -1087,7 +1094,7 @@ body {
   border-radius: 50%;
   margin-bottom: var(--space-6);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
     0 8px 24px -6px rgba(0, 170, 128, 0.30);
   animation: successPop 0.6s var(--ease-spring);
 }
@@ -1140,7 +1147,7 @@ body {
   align-items: center;
   gap: var(--space-2);
   padding: 12px var(--space-6);
-  background: var(--color-white);
+  background: var(--color-surface);
   color: var(--color-teal-800);
   border: 1.5px solid var(--color-teal-200);
   border-radius: var(--radius-md);
@@ -1156,7 +1163,7 @@ body {
 .btn-secondary:hover {
   background: var(--color-teal);
   border-color: var(--color-teal);
-  color: var(--color-white);
+  color: var(--color-on-accent);
   transform: translateY(-1px);
   box-shadow: 0 6px 14px -4px rgba(0, 170, 128, 0.40);
 }
@@ -1174,7 +1181,7 @@ body {
   padding: var(--space-8) var(--space-5);
   color: var(--color-muted);
   font-size: 0.9rem;
-  background: var(--color-white);
+  background: var(--color-surface);
   border-top: 1px solid var(--color-line);
   margin-top: var(--space-12);
   position: relative;
@@ -1222,8 +1229,8 @@ body {
   align-items: center;
   gap: var(--space-2);
   padding: 7px 14px;
-  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-700) 100%);
-  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-grad) 100%);
+  color: var(--color-on-accent);
   border-radius: var(--radius-pill);
   text-decoration: none;
   font-weight: 700;
@@ -1252,7 +1259,7 @@ body {
 .site-footer .credit-phone:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 3px var(--color-white),
+    0 0 0 3px var(--color-surface),
     0 0 0 5px var(--color-teal),
     0 4px 10px -2px rgba(0, 170, 128, 0.35);
 }
@@ -1325,8 +1332,8 @@ body.is-locked .login-screen {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle 280px at 30% 20%, rgba(0, 170, 128, 0.06), transparent 70%),
-    radial-gradient(circle 240px at 70% 80%, rgba(245, 156, 0, 0.05), transparent 70%);
+    radial-gradient(circle 280px at 30% 20%, rgba(0, 170, 128, 0.10), transparent 70%),
+    radial-gradient(circle 240px at 70% 80%, rgba(245, 156, 0, 0.08), transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -1352,7 +1359,7 @@ body.is-locked .login-screen {
   color: var(--color-teal);
   margin: 0 auto var(--space-4);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
     0 8px 20px -6px rgba(0, 170, 128, 0.25);
 }
 
@@ -1407,9 +1414,9 @@ body.is-locked .login-screen {
 
 .btn-logout {
   padding: 10px var(--space-5);
-  background: var(--color-white);
-  color: #dc2626;
-  border: 1.5px solid #fecaca;
+  background: var(--color-surface);
+  color: var(--color-danger);
+  border: 1.5px solid var(--color-danger-line);
   border-radius: var(--radius-md);
   font-family: var(--font-family);
   font-size: 0.9rem;
@@ -1419,11 +1426,11 @@ body.is-locked .login-screen {
 }
 
 .btn-logout:hover {
-  background: #dc2626;
-  border-color: #dc2626;
-  color: var(--color-white);
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+  color: var(--color-on-accent);
   transform: translateY(-1px);
-  box-shadow: 0 6px 14px -4px rgba(220, 38, 38, 0.40);
+  box-shadow: 0 6px 14px -4px rgba(255, 107, 107, 0.40);
 }
 
 .btn-home {
@@ -1431,8 +1438,8 @@ body.is-locked .login-screen {
   align-items: center;
   justify-content: center;
   padding: 10px var(--space-5);
-  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-700) 100%);
-  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-grad) 100%);
+  color: var(--color-on-accent);
   border: none;
   border-radius: var(--radius-md);
   font-family: var(--font-family);
@@ -1453,7 +1460,7 @@ body.is-locked .login-screen {
 .btn-export {
   padding: 10px var(--space-5);
   background: linear-gradient(135deg, var(--color-orange) 0%, #d97706 100%);
-  color: var(--color-white);
+  color: var(--color-on-accent);
   border: none;
   border-radius: var(--radius-md);
   font-family: var(--font-family);
@@ -1493,7 +1500,7 @@ body.is-locked .login-screen {
 .export-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(15, 28, 26, 0.45);
+  background: rgba(0, 0, 0, 0.72);
   backdrop-filter: blur(2px);
   opacity: 0;
   transition: opacity var(--duration-slow) var(--ease-out);
@@ -1507,9 +1514,9 @@ body.is-locked .login-screen {
   position: relative;
   width: min(540px, 100%);
   max-height: calc(100vh - 2 * var(--space-4));
-  background: var(--color-white);
+  background: var(--color-surface);
   border-radius: var(--radius-lg);
-  box-shadow: 0 24px 60px -12px rgba(15, 28, 26, 0.3);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.65);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -1530,7 +1537,7 @@ body.is-locked .login-screen {
   align-items: flex-start;
   gap: var(--space-3);
   padding: var(--space-6) var(--space-6) var(--space-5);
-  background: linear-gradient(135deg, var(--color-teal-50) 0%, var(--color-white) 100%);
+  background: linear-gradient(135deg, var(--color-teal-50) 0%, var(--color-surface) 100%);
   border-bottom: 1px solid var(--color-line);
   position: relative;
 }
@@ -1565,7 +1572,7 @@ body.is-locked .login-screen {
   height: 36px;
   display: grid;
   place-items: center;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
   color: var(--color-muted);
@@ -1608,7 +1615,7 @@ body.is-locked .login-screen {
   gap: 4px;
   height: 100%;
   padding: var(--space-4);
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1.5px solid var(--color-line);
   border-radius: var(--radius-md);
   transition: all var(--duration) var(--ease-out);
@@ -1662,7 +1669,7 @@ body.is-locked .login-screen {
   font-family: var(--font-family);
   font-size: 0.88rem;
   color: var(--color-ink);
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
   transition: border-color var(--duration) var(--ease-out);
@@ -1714,7 +1721,7 @@ body.is-locked .login-screen {
   align-items: center;
   gap: var(--space-3);
   padding: 10px var(--space-3);
-  background: var(--color-white);
+  background: var(--color-surface);
   border-radius: 10px;
   cursor: pointer;
   font-size: 0.9rem;
@@ -1744,8 +1751,8 @@ body.is-locked .login-screen {
   height: 22px;
   border: 1.5px solid var(--color-line);
   border-radius: 7px;
-  background: var(--color-white);
-  color: var(--color-white);
+  background: var(--color-surface);
+  color: var(--color-on-accent);
   transition: all var(--duration) var(--ease-out);
 }
 
@@ -1821,7 +1828,7 @@ body.is-locked .login-screen {
 }
 
 .export-modal__cancel {
-  background: var(--color-white);
+  background: var(--color-surface);
   color: var(--color-muted);
   border: 1px solid var(--color-line);
 }
@@ -1833,7 +1840,7 @@ body.is-locked .login-screen {
 
 .export-modal__confirm {
   background: linear-gradient(135deg, var(--color-orange) 0%, #d97706 100%);
-  color: var(--color-white);
+  color: var(--color-on-accent);
   border: none;
   box-shadow: 0 4px 10px -2px rgba(245, 156, 0, 0.35);
 }
@@ -1863,7 +1870,7 @@ body.is-locked .login-screen {
 
 .stat-card {
   position: relative;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
   padding: var(--space-5) var(--space-6);
@@ -1906,7 +1913,7 @@ body.is-locked .login-screen {
 }
 
 .table-wrapper {
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
@@ -1921,8 +1928,8 @@ body.is-locked .login-screen {
 }
 
 .data-table thead {
-  background: linear-gradient(180deg, var(--color-teal) 0%, var(--color-teal-700) 100%);
-  color: var(--color-white);
+  background: linear-gradient(180deg, var(--color-teal) 0%, var(--color-teal-grad) 100%);
+  color: var(--color-on-accent);
 }
 
 .data-table th,
@@ -2001,7 +2008,7 @@ body.is-locked .login-screen {
   align-items: center;
   gap: var(--space-4);
   padding: var(--space-3) var(--space-4);
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
@@ -2044,7 +2051,7 @@ body.is-locked .login-screen {
 .toolbar-search input:focus {
   outline: none;
   border-color: var(--color-teal);
-  background: var(--color-white);
+  background: var(--color-surface);
   box-shadow: var(--shadow-focus);
 }
 
@@ -2074,8 +2081,8 @@ body.is-locked .login-screen {
   font-family: var(--font-family);
   font-size: 0.92rem;
   font-weight: 600;
-  background: var(--color-white)
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235a6b68' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>")
+  background: var(--color-surface)
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa8a5' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>")
     no-repeat;
   background-position: left 12px center;
   background-size: 14px;
@@ -2158,7 +2165,7 @@ body.is-locked .login-screen {
 
 .nomination-card {
   position: relative;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
@@ -2367,7 +2374,7 @@ body.is-locked .login-screen {
   min-width: 38px;
   height: 38px;
   padding: 0 12px;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1.5px solid var(--color-line);
   border-radius: var(--radius-md);
   color: var(--color-ink-soft);
@@ -2386,9 +2393,9 @@ body.is-locked .login-screen {
 }
 
 .pagination__btn.is-active {
-  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-700) 100%);
+  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-grad) 100%);
   border-color: var(--color-teal);
-  color: var(--color-white);
+  color: var(--color-on-accent);
   box-shadow: 0 4px 10px -2px rgba(0, 170, 128, 0.40);
   cursor: default;
 }
@@ -2440,7 +2447,7 @@ body.is-locked .login-screen {
 .drawer__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(15, 28, 26, 0.45);
+  background: rgba(0, 0, 0, 0.72);
   backdrop-filter: blur(2px);
   opacity: 0;
   transition: opacity var(--duration-slow) var(--ease-out);
@@ -2456,8 +2463,8 @@ body.is-locked .login-screen {
   bottom: 0;
   left: 0;
   width: min(520px, 100vw);
-  background: var(--color-white);
-  box-shadow: 4px 0 32px rgba(15, 28, 26, 0.18);
+  background: var(--color-surface);
+  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.55);
   display: flex;
   flex-direction: column;
   transform: translateX(-100%);
@@ -2475,7 +2482,7 @@ body.is-locked .login-screen {
   align-items: flex-start;
   gap: var(--space-3);
   padding: var(--space-6) var(--space-6) var(--space-5);
-  background: linear-gradient(135deg, var(--color-teal-50) 0%, var(--color-white) 100%);
+  background: linear-gradient(135deg, var(--color-teal-50) 0%, var(--color-surface) 100%);
   border-bottom: 1px solid var(--color-line);
   position: relative;
 }
@@ -2498,7 +2505,7 @@ body.is-locked .login-screen {
 .drawer__org-pill {
   display: inline-block;
   padding: 4px 12px;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-teal-200);
   color: var(--color-teal-700);
   border-radius: var(--radius-pill);
@@ -2530,7 +2537,7 @@ body.is-locked .login-screen {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1.5px solid var(--color-line);
   border-radius: var(--radius-md);
   color: var(--color-muted);
@@ -2607,7 +2614,7 @@ body.is-locked .login-screen {
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--color-orange), var(--color-yellow));
-  color: var(--color-white);
+  color: var(--color-on-accent);
   border-radius: 50%;
   font-size: 0.78rem;
   font-weight: 800;
@@ -2763,9 +2770,9 @@ body.is-locked .login-screen {
   align-items: center;
   gap: 12px;
   padding: 8px 20px;
-  background: var(--color-white);
+  background: var(--color-surface);
   border-bottom: 2px solid var(--color-teal);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
   transform: translateY(-100%);
   transition: transform 0.35s ease;
   pointer-events: none;
@@ -2887,14 +2894,14 @@ body.is-locked .login-screen {
 .block-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(15, 28, 26, 0.7);
+  background: rgba(0, 0, 0, 0.82);
   backdrop-filter: blur(4px);
   cursor: pointer;
 }
 
 .block-modal__dialog {
   position: relative;
-  background: var(--color-white);
+  background: var(--color-surface);
   border-radius: var(--radius-lg);
   max-width: 480px;
   width: 100%;
@@ -2958,7 +2965,7 @@ body.is-locked .login-screen {
 }
 
 .score-badge--high { background: var(--color-teal-50);  color: var(--color-teal-800); border-color: var(--color-teal-200); }
-.score-badge--mid  { background: var(--color-yellow-50); color: #8a6d00;               border-color: #f3d98a; }
+.score-badge--mid  { background: var(--color-yellow-50); color: #e9c563;               border-color: #5c4a12; }
 .score-badge--low  { background: var(--color-orange-50); color: var(--color-orange);   border-color: var(--color-orange-100); }
 .score-badge--na   { background: var(--color-line-soft); color: var(--color-muted);    border-color: var(--color-line); }
 
@@ -3012,7 +3019,7 @@ body.is-locked .login-screen {
   padding: 2px 8px;
   border-radius: var(--radius-pill);
   background: var(--color-teal);
-  color: var(--color-white);
+  color: var(--color-on-accent);
   font-size: 0.85rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -3102,7 +3109,7 @@ body.is-locked .login-screen {
   align-items: center;
   gap: var(--space-2);
   padding: 12px var(--space-4);
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1.5px solid var(--color-line);
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -3132,7 +3139,7 @@ body.is-locked .login-screen {
   border: 1.5px solid var(--color-line);
   border-radius: var(--radius-xs);
   background: var(--color-canvas);
-  color: var(--color-white);
+  color: var(--color-on-accent);
   transition: all var(--duration) var(--ease-out);
 }
 
@@ -3211,12 +3218,12 @@ body.is-locked .login-screen {
   background:
     radial-gradient(520px 240px at 100% 0%, rgba(0, 170, 128, 0.10), transparent 60%),
     radial-gradient(420px 220px at 0% 100%, rgba(245, 156, 0, 0.08), transparent 60%),
-    #ffffff;
+    var(--color-surface);
   border: 1px solid var(--color-teal-100);
   border-radius: var(--radius-xl);
   box-shadow:
-    0 10px 30px -12px rgba(15, 28, 26, 0.22),
-    0 2px 8px rgba(15, 28, 26, 0.06);
+    0 10px 30px -12px rgba(0, 0, 0, 0.60),
+    0 2px 8px rgba(0, 0, 0, 0.40);
   overflow: hidden;
   text-align: right;
   position: relative;
@@ -3272,8 +3279,8 @@ body.is-locked .login-screen {
 
 .pro-card__ribbon {
   display: inline-block;
-  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-700) 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-grad) 100%);
+  color: var(--color-on-accent);
   font-size: 0.8rem;
   font-weight: 700;
   padding: 5px var(--space-4);
@@ -3359,7 +3366,7 @@ body.is-locked .login-screen {
 .pro-card__value {
   display: inline-block;
   background: var(--color-orange);
-  color: #ffffff;
+  color: var(--color-on-accent);
   font-size: 0.82rem;
   font-weight: 700;
   padding: 5px 12px;
@@ -3438,18 +3445,18 @@ body.is-locked .login-screen {
 
 .card-action--primary {
   background: var(--color-teal);
-  color: #ffffff;
+  color: var(--color-on-accent);
 }
 
 .card-action--primary:hover:not(:disabled) {
-  background: var(--color-teal-700);
+  background: var(--color-teal-grad);
   transform: translateY(-1px);
   box-shadow: 0 8px 18px -6px rgba(0, 170, 128, 0.45);
 }
 
 .card-action--wa {
   background: #25D366;
-  color: #ffffff;
+  color: var(--color-on-accent);
 }
 
 .card-action--wa:hover:not(:disabled) {
@@ -3459,7 +3466,7 @@ body.is-locked .login-screen {
 }
 
 .card-action--ghost {
-  background: var(--color-white);
+  background: var(--color-surface);
   color: var(--color-teal-800);
   border-color: var(--color-teal-200);
 }
@@ -3617,7 +3624,7 @@ body.is-locked .login-screen {
   flex-direction: column;
   gap: var(--space-3);
   padding: var(--space-5);
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xs);
@@ -3706,7 +3713,7 @@ body.is-locked .login-screen {
 .sv-card__actions button:hover {
   background: var(--color-teal);
   border-color: var(--color-teal);
-  color: var(--color-white);
+  color: var(--color-on-accent);
 }
 
 .sv-card__actions button.is-danger {
@@ -3718,7 +3725,7 @@ body.is-locked .login-screen {
 .sv-card__actions button.is-danger:hover {
   background: var(--color-error);
   border-color: var(--color-error);
-  color: var(--color-white);
+  color: var(--color-on-accent);
 }
 
 /* ===== شارات الحالة ===== */
@@ -3790,7 +3797,7 @@ body.is-locked .login-screen {
   text-align: center;
   color: var(--color-muted);
   font-weight: 600;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px dashed var(--color-line);
   border-radius: var(--radius-lg);
 }
@@ -3800,7 +3807,7 @@ body.is-locked .login-screen {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
   margin-bottom: var(--space-3);
-  background: var(--color-white);
+  background: var(--color-surface);
   overflow: hidden;
 }
 
@@ -3845,7 +3852,7 @@ body.is-locked .login-screen {
   flex-shrink: 0;
   padding: 3px 10px;
   border-radius: var(--radius-pill);
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   font-size: 0.72rem;
   font-weight: 600;
@@ -3864,7 +3871,7 @@ body.is-locked .login-screen {
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--color-ink-soft);
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-xs);
   cursor: pointer;
@@ -3942,7 +3949,7 @@ body.is-locked .login-screen {
   flex-wrap: wrap;
   padding: var(--space-4) var(--space-5);
   margin-bottom: var(--space-5);
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xs);
@@ -4065,7 +4072,7 @@ body.is-locked .login-screen {
   height: 100%;
   min-width: 2px;
   border-radius: var(--radius-pill);
-  background: linear-gradient(90deg, var(--color-teal) 0%, var(--color-teal-700) 100%);
+  background: linear-gradient(90deg, var(--color-teal) 0%, var(--color-teal-grad) 100%);
 }
 
 .qa-row__val {
@@ -4122,3 +4129,72 @@ body.is-locked .login-screen {
 
 /* أزرار البطاقة المخفية لا تُبقي فراغاً في شبكة الإجراءات */
 .card-actions button[hidden] { display: none !important; }
+
+/* ============================================================
+   ضبط عناصر المتصفح الأصلية للوضع الداكن
+   (الوضع الداكن هو الوضع الوحيد — لا يوجد وضع فاتح)
+   ============================================================ */
+
+html {
+  background: var(--color-canvas);
+}
+
+/* قوائم <select> المنسدلة */
+.form-select option,
+select option {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+}
+
+/* منع كروم من طلاء الحقول المملوءة تلقائياً بالأبيض */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: var(--color-ink);
+  caret-color: var(--color-ink);
+  -webkit-box-shadow: 0 0 0 1000px var(--color-surface) inset;
+  box-shadow: 0 0 0 1000px var(--color-surface) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* مؤشّر الكتابة وتحديد النص */
+input,
+textarea,
+select {
+  caret-color: var(--color-teal);
+}
+
+/* أشرطة التمرير */
+* {
+  scrollbar-color: var(--color-teal-200) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-line-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-teal-200);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-line-soft);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-teal-grad);
+}
+
+/* عناصر التحكم الأصلية تتبع لون الهوية */
+input[type="checkbox"],
+input[type="radio"],
+progress,
+input[type="range"] {
+  accent-color: var(--color-teal);
+}
