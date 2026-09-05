@@ -13,10 +13,13 @@
     const name = (h1 && h1.textContent.trim()) || document.title;
     const desc = (tag && !tag.hidden && tag.textContent.trim()) || '';
 
+    // canonical إن وُجد: صفحة مشاركة مستقلة تحمل وسوم og صحيحة
+    const canonical = document.querySelector('link[rel="canonical"]');
+
     return {
       title: document.title,
       text:  desc ? name + ' — ' + desc : name,
-      url:   window.location.href
+      url:   (canonical && canonical.href) || window.location.href
     };
   }
 

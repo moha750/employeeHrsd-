@@ -125,6 +125,11 @@
   // أضف الـ slug هنا لإخفائه عن استبيان بعينه.
   const NO_INITIATIVE_BADGE = ['mythaq-nltzm-lnrtqy'];
 
+  // استثناءات فردية: استبيانات لها صفحة مشاركة مستقلة تحمل وسوم og
+  // صحيحة، لأن زواحف واتساب وتليجرام لا تُشغّل JavaScript. نُعلنها
+  // في canonical فيلتقطها زرّ المشاركة بلا أن يعرف شيئاً عنها.
+  const SHARE_PAGES = { 'mythaq-nltzm-lnrtqy': 'mythaq.html' };
+
   function renderHeader() {
     // إبراز الكلمة الأخيرة من العنوان بلون التمييز — كما في التصميم الأصلي
     const words = survey.title.trim().split(/\s+/);
@@ -138,6 +143,17 @@
     // بادج المبادرة يُخفى عن الاستبيانات المستثناة
     const badge = document.getElementById('initiative-name');
     if (badge) badge.hidden = NO_INITIATIVE_BADGE.includes(survey.slug);
+
+    const sharePage = SHARE_PAGES[survey.slug];
+    if (sharePage) {
+      let link = document.querySelector('link[rel="canonical"]');
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'canonical';
+        document.head.appendChild(link);
+      }
+      link.href = new URL(sharePage, window.location.href).href;
+    }
 
     taglineEl.textContent = survey.description || '';
     taglineEl.hidden = !survey.description;
