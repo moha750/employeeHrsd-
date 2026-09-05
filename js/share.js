@@ -4,17 +4,28 @@
   const shareBtn = document.getElementById('share-btn');
   if (!shareBtn) return;
 
-  const shareData = {
-    title: document.title,
-    text: 'مبادرة صديقي المهني — لأن الكلمة الطيبة قيمة مؤسسية. وجّه رسالة تقدير إلى زميلك الذي أثّر في رحلتك المهنية.',
-    url: window.location.href
-  };
+  // تُبنى عند الضغط لا عند التحميل: صفحة الاستبيان تجلب بياناته
+  // بشكل غير متزامن، فالعنوان لا يكون جاهزاً وقت تشغيل هذا الملف.
+  function shareData() {
+    const h1  = document.querySelector('.campaign-title');
+    const tag = document.querySelector('.campaign-tagline');
+
+    const name = (h1 && h1.textContent.trim()) || document.title;
+    const desc = (tag && !tag.hidden && tag.textContent.trim()) || '';
+
+    return {
+      title: document.title,
+      text:  desc ? name + ' — ' + desc : name,
+      url:   window.location.href
+    };
+  }
 
   shareBtn.addEventListener('click', async () => {
+    const data = shareData();
     // (1) Web Share API (الطريقة الأصلية على الموبايل)
     if (navigator.share) {
       try {
-        await navigator.share(shareData);
+        await navigator.share(data);
         return;
       } catch (err) {
         if (err && err.name === 'AbortError') return; // أغلق المستخدم النافذة
@@ -24,12 +35,12 @@
 
     // (2) Fallback: نسخ الرابط للحافظة
     try {
-      await navigator.clipboard.writeText(shareData.url);
+      await navigator.clipboard.writeText(data.url);
       showToast('تم نسخ رابط الاستبيان', 'success');
     } catch {
       // (3) Fallback أخير: تحديد النص ودعوة المستخدم لنسخه
       const ta = document.createElement('textarea');
-      ta.value = shareData.url;
+      ta.value = data.url;
       ta.setAttribute('readonly', '');
       ta.style.position = 'fixed';
       ta.style.opacity = '0';
