@@ -15,7 +15,7 @@
   <meta property="og:locale" content="ar_SA">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="stylesheet" href="css/styles.css?v=20260905-4">
+  <link rel="stylesheet" href="css/styles.css?v=20260905-5">
 </head>
 <body>
 
@@ -141,6 +141,12 @@
     <!-- النموذج (يُبنى من قاعدة البيانات) -->
     <section class="card" id="form-card" hidden>
       <div id="alert-container"></div>
+
+      <!-- مقدمة الاستبيان — تظهر فقط إن كُتبت في الباني -->
+      <div class="info-box" id="survey-intro" hidden>
+        <h2 id="survey-intro-title">المقدمة</h2>
+        <div id="survey-intro-body"></div>
+      </div>
 
       <form id="survey-form" novalidate>
         <div id="questions-root"></div>

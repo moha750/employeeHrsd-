@@ -35,6 +35,9 @@ create table if not exists public.surveys (
   status      text not null default 'draft'
               check (status in ('draft', 'active', 'closed')),
 
+  -- مقدمة تظهر في صندوق أعلى النموذج (تختلف عن description)
+  intro       text check (length(intro) <= 5000),
+
   -- رسالة شاشة الشكر بعد الإرسال
   success_message text check (length(success_message) <= 1000),
 

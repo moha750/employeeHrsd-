@@ -60,6 +60,7 @@
   const fSlug    = $('sv-slug');
   const fDesc    = $('sv-desc');
   const fSuccess = $('sv-success');
+  const fIntro   = $('sv-intro');
   const fStatus  = $('sv-status');
   const fTheme   = $('sv-theme');
   const linkPrev = $('sv-link-preview');
@@ -316,6 +317,7 @@
         title:           s.title + ' (نسخة)',
         description:     s.description,
         success_message: s.success_message,
+        intro:           s.intro,
         theme:           s.theme === 'dark' ? 'dark' : 'light',
         status:          'draft'
       }).select().single();
@@ -404,6 +406,7 @@
     if (!id) {
       fTitle.value = ''; fSlug.value = ''; fDesc.value = '';
       fSuccess.value = ''; fStatus.value = 'draft'; fTheme.value = 'light';
+      fIntro.value = '';
       editorMeta.textContent = 'استبيان جديد';
       editorWarn.hidden = true;
       renderQuestions();
@@ -443,6 +446,7 @@
       fSlug.value    = s.slug;
       fDesc.value    = s.description || '';
       fSuccess.value = s.success_message || '';
+      fIntro.value   = s.intro || '';
       fStatus.value  = s.status;
       fTheme.value   = s.theme === 'dark' ? 'dark' : 'light';
 
@@ -850,6 +854,7 @@
         title:           fTitle.value.trim(),
         description:     fDesc.value.trim() || null,
         success_message: fSuccess.value.trim() || null,
+        intro:           fIntro.value.trim() || null,
         status:          fStatus.value,
         theme:           fTheme.value === 'dark' ? 'dark' : 'light',
         card_enabled:    cardToggle.checked,

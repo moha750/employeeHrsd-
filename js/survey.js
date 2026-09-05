@@ -31,6 +31,8 @@
   const successText    = document.getElementById('success-text');
   const newResponseBtn = document.getElementById('new-response-btn');
   const titleEl        = document.getElementById('campaign-title');
+  const introBox       = document.getElementById('survey-intro');
+  const introBody      = document.getElementById('survey-intro-body');
   const taglineEl      = document.getElementById('campaign-tagline');
 
   // ===== الحالة =====
@@ -139,6 +141,16 @@
 
     taglineEl.textContent = survey.description || '';
     taglineEl.hidden = !survey.description;
+
+    // المقدمة: فقرة لكل سطر، والنص مُهرَّب فلا يُفسَّر كـ HTML
+    const intro = (survey.intro || '').trim();
+    if (introBox && introBody) {
+      introBody.innerHTML = intro
+        ? intro.split(/\n{2,}|\n/).map(t => t.trim()).filter(Boolean)
+               .map(t => '<p>' + escapeHtml(t) + '</p>').join('')
+        : '';
+      introBox.hidden = !intro;
+    }
 
     document.title = survey.title +
       ' — فرع وزارة الموارد البشرية والتنمية الاجتماعية بالمنطقة الشرقية';

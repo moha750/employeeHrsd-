@@ -76,6 +76,7 @@
   --color-line-soft:  #f1f4f3;
   --color-canvas:     #fafbfb;
   --color-toast-bg:   var(--color-ink);
+  --color-logo-ink:   #158285;   /* لون نص الشعار */
 
   /* تطبيقات الألوان */
   --color-primary: var(--color-teal);
@@ -136,6 +137,9 @@
   --duration-slow: 380ms;
 
   --font-family: 'HRSD', sans-serif;
+
+  /* المسافة المتساوية فوق سطر الوحدة وتحته في الترويسة */
+  --header-gap: 20px;
 }
 
 * {
@@ -226,10 +230,10 @@ body {
 /* سطر الوحدة بين الشعار والبادجات */
 .unit-name {
   position: relative;
-  margin: var(--space-5) auto var(--space-4);
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: var(--color-muted);
+  margin: 0 auto var(--header-gap);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--color-logo-ink);
   letter-spacing: 0.2px;
   line-height: 1.6;
 }
@@ -2701,10 +2705,15 @@ body.is-locked .login-screen {
    ============================================================ */
 
 .site-logo {
+  /* العرض يُعرَّف هنا مرة واحدة ليتبعه حساب الهامش تلقائياً */
+  --logo-w: min(420px, 80%);
   display: block;
-  width: min(420px, 80%);
+  width: var(--logo-w);
   height: auto;
-  margin: 0 auto 20px;
+  /* داخل ملف الشعار ١٧٫٩٣٪ من عرضه مساحة فارغة أسفل النص. نطرحها
+     هنا كي تُقاس المسافة من النص المرئي لا من حدود الملف — وبالنسبة
+     لا برقم ثابت، لأن الفراغ يصغر مع الشعار على الشاشات الضيقة. */
+  margin: 0 auto calc(var(--header-gap) - var(--logo-w) * 0.1793);
   position: relative;
   z-index: 1;
 }
@@ -2832,8 +2841,8 @@ body.is-locked .login-screen {
   }
 
   .site-logo {
-    width: 90%;
-    margin-bottom: 14px;
+    /* يكفي تغيير العرض — الهامش يُحتسب منه في القاعدة الأساسية */
+    --logo-w: 90%;
   }
 
   .sticky-bar {
@@ -4271,6 +4280,7 @@ body.is-locked .login-screen {
   --color-line-soft:  #1a2422;
   --color-canvas:     #0a1211;
   --color-toast-bg:   #1d2b28;
+  --color-logo-ink:   var(--color-teal-700);
 
   /* ظلال معتمة تناسب الخلفية الداكنة */
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.40);
