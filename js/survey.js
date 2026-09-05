@@ -156,6 +156,22 @@
              : '');
   }
 
+  // أزرار راديو كلاسيكية — شكل عرض بديل لسؤال «اختيار واحد»
+  function buildRadios(q) {
+    const items = q.options.map((opt, i) => {
+      const id = 'q-' + q.id + '-' + i;
+      return '<label class="radio-option">' +
+               '<input type="radio" id="' + id + '" ' +
+                      'name="q-' + q.id + '" value="' + escapeHtml(opt) + '">' +
+               '<span class="radio-option__dot" aria-hidden="true"></span>' +
+               '<span class="radio-option__label">' + escapeHtml(opt) + '</span>' +
+             '</label>';
+    }).join('');
+
+    return '<div class="radio-list" id="ctl-' + q.id + '" role="radiogroup" ' +
+                'aria-labelledby="lbl-' + q.id + '">' + items + '</div>';
+  }
+
   function buildChips(q, inputType) {
     const chips = q.options.map((opt, i) => {
       const id = 'q-' + q.id + '-' + i;
@@ -219,7 +235,10 @@
                  ).join('') +
                '</select>';
 
-      case 'single_choice': return buildChips(q, 'radio');
+      case 'single_choice':
+        return q.config.style === 'radio'
+          ? buildRadios(q)
+          : buildChips(q, 'radio');
       case 'multi_choice':  return buildChips(q, 'checkbox');
       case 'rating':        return buildRating(q);
 
@@ -301,7 +320,7 @@
     if (!root) return null;
 
     // مجموعات الاختيار تُعلَّم على الحاوية، والحقول المفردة على .form-group
-    const chips = root.querySelector('.value-chips');
+    const chips = root.querySelector('.value-chips, .radio-list');
     (chips || root).classList.add('is-invalid');
     return chips || root;
   }
@@ -507,6 +526,11 @@
       survey = rows[0];
       applyTheme(survey.theme);
       renderHeader();
+
+      // عدّاد الزوار ينتظر هذا ليعدّ لهذا الاستبيان وحده
+      window.dispatchEvent(new CustomEvent('hrsd:survey-ready', {
+        detail: { slug: survey.slug }
+      }));
 
       if (survey.status !== 'active') {
         showState('انتهى هذا الاستبيان ولم يعد يستقبل إجابات. شكرًا لاهتمامك.', false);

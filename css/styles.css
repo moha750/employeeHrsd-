@@ -3089,9 +3089,9 @@ body.is-locked .login-screen {
 
 /* ===== شرائح القيم القابلة للاختيار ===== */
 .value-chips {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .value-chips.is-invalid {
@@ -3113,6 +3113,8 @@ body.is-locked .login-screen {
   font-weight: 600;
   font-size: 0.98rem;
   color: var(--color-ink-soft);
+  line-height: 1.6;
+  text-align: start;
   transition: all var(--duration) var(--ease-out);
   box-shadow: var(--shadow-xs);
   user-select: none;
@@ -3519,9 +3521,6 @@ body.is-locked .login-screen {
 
 /* شاشات صغيرة */
 @media (max-width: 480px) {
-  .value-chips {
-    grid-template-columns: repeat(2, 1fr);
-  }
   .card-action {
     flex: 1 1 100%;
     justify-content: center;
@@ -4126,6 +4125,102 @@ body.is-locked .login-screen {
 
 /* أزرار البطاقة المخفية لا تُبقي فراغاً في شبكة الإجراءات */
 .card-actions button[hidden] { display: none !important; }
+
+/* ============================================================
+   أزرار الراديو — شكل عرض بديل لسؤال «اختيار واحد»
+   مبنية على الرموز كلها، فتتبع الفاتح والداكن تلقائياً.
+   ============================================================ */
+
+.radio-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.radio-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 14px var(--space-4);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-line);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  user-select: none;
+  transition: border-color var(--duration) var(--ease-out),
+              background-color var(--duration) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+}
+
+.radio-option:hover { border-color: var(--color-teal-200); background: var(--color-teal-50); }
+.radio-option:active { transform: scale(0.99); }
+
+/* الحقل الأصلي مخفي بصرياً لا وظيفياً: يبقى قابلاً للتنقّل بلوحة المفاتيح */
+.radio-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.radio-option__dot {
+  position: relative;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--color-muted-soft);
+  border-radius: 50%;
+  background: var(--color-surface);
+  transition: border-color var(--duration) var(--ease-out),
+              box-shadow var(--duration) var(--ease-out);
+}
+
+.radio-option__dot::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--color-on-accent);
+  transform: scale(0);
+  transition: transform var(--duration) var(--ease-spring);
+}
+
+.radio-option:hover .radio-option__dot { border-color: var(--color-teal); }
+
+.radio-option input:checked ~ .radio-option__dot {
+  background: var(--color-teal);
+  border-color: var(--color-teal);
+  box-shadow: 0 2px 6px rgba(0, 170, 128, 0.30);
+}
+
+.radio-option input:checked ~ .radio-option__dot::after { transform: scale(1); }
+
+.radio-option:has(input:checked) {
+  border-color: var(--color-teal);
+  background: var(--color-teal-50);
+}
+
+.radio-option input:focus-visible ~ .radio-option__dot {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.radio-option__label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  line-height: 1.6;
+}
+
+.radio-list.is-invalid {
+  border: 1.5px solid var(--color-error);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+}
+
 
 /* ============================================================
    الوضع الداكن — طبقة اختيارية لكل استبيان على حدة

@@ -95,6 +95,7 @@ create table if not exists public.questions (
   -- إعدادات إضافية حسب النوع:
   --   short_text/long_text : {"max_length": 200}
   --   multi_choice         : {"min_select": 1, "max_select": 3}
+  --   single_choice        : {"style": "chips"|"radio"}  -- شكل العرض
   --   rating               : {"min": 1, "max": 5, "style": "stars"|"numbers"}
   config      jsonb not null default '{}'::jsonb
               check (jsonb_typeof(config) = 'object'),

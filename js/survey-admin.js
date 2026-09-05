@@ -623,6 +623,16 @@
         '</div>';
     }
 
+    if (q.type === 'single_choice') {
+      extra +=
+        '<div class="q-row">' +
+          selField('شكل العرض', 'style', q.config.style, i, [
+            ['chips', 'شرائح — الافتراضي'],
+            ['radio', 'أزرار راديو']
+          ]) +
+        '</div>';
+    }
+
     if (q.type === 'multi_choice') {
       extra +=
         '<div class="q-row">' +
@@ -680,6 +690,17 @@
       '<label class="form-label" for="q-' + key + '-' + i + '">' + label + '</label>' +
       '<input type="number" id="q-' + key + '-' + i + '" class="form-input" ' +
              'data-c="' + key + '" value="' + (value === undefined || value === null ? '' : esc(value)) + '">' +
+    '</div>';
+  }
+
+  function selField(label, key, value, i, opts) {
+    const cur = value || opts[0][0];
+    return '<div class="form-group">' +
+      '<label class="form-label" for="q-' + key + '-' + i + '">' + label + '</label>' +
+      '<select id="q-' + key + '-' + i + '" class="form-input form-select" data-c="' + key + '">' +
+        opts.map(o => '<option value="' + o[0] + '"' +
+                      (o[0] === cur ? ' selected' : '') + '>' + esc(o[1]) + '</option>').join('') +
+      '</select>' +
     '</div>';
   }
 

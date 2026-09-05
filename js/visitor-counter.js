@@ -1,5 +1,10 @@
 // ============================================================
-// عدّاد زوار الموقع — تسجيل/عرض
+// عدّاد الزوار — تسجيل/عرض
+// ------------------------------------------------------------
+// لكل استبيان عدّاده المستقل. صفحة الاستبيان تحمل
+// data-scope="survey" على عنصر العدّاد، فينتظر حتى تُحدّد
+// صفحة الاستبيان أيَّ استبيان تعرض ثم يعدّ له وحده.
+// أما بقية الصفحات فتعدّ للموقع كما كانت.
 // ============================================================
 (function () {
   'use strict';
@@ -13,33 +18,34 @@
   const valueEl   = document.getElementById('visitor-counter-value');
   if (!counterEl || !valueEl) return;
 
-  const SESSION_KEY = 'hrsd_visit_counted';
-
   function show(n) {
-    valueEl.textContent = formatNumber(n);
+    valueEl.textContent = Number(n).toLocaleString('ar-SA');
     counterEl.hidden = false;
   }
 
-  function formatNumber(n) {
-    return Number(n).toLocaleString('ar-SA');
-  }
+  // مفتاح الصف في site_stats، ومفتاح الجلسة المقابل له
+  function statsKey(slug) { return slug ? 'survey:' + slug : 'visitors'; }
+  function sessionKey(slug) { return 'hrsd_visit_counted:' + statsKey(slug); }
 
-  async function init() {
+  async function count(slug) {
     try {
-      if (sessionStorage.getItem(SESSION_KEY)) {
+      // زيارة محسوبة في هذه الجلسة: نعرض الرقم بلا زيادة
+      if (sessionStorage.getItem(sessionKey(slug))) {
         const { data, error } = await supabase
           .from('site_stats')
           .select('value')
-          .eq('key', 'visitors')
-          .single();
+          .eq('key', statsKey(slug))
+          .maybeSingle();
         if (error) throw error;
-        show(data.value);
+        show(data ? data.value : 0);
         return;
       }
 
-      const { data, error } = await supabase.rpc('increment_visitor_count');
+      const { data, error } = await supabase.rpc('increment_visits', {
+        p_slug: slug || null
+      });
       if (error) throw error;
-      sessionStorage.setItem(SESSION_KEY, '1');
+      sessionStorage.setItem(sessionKey(slug), '1');
       show(data);
     } catch (e) {
       counterEl.hidden = true;
@@ -47,5 +53,12 @@
     }
   }
 
-  init();
+  if (counterEl.dataset.scope === 'survey') {
+    // ننتظر صفحة الاستبيان حتى تحسم أيَّ استبيان تعرض
+    window.addEventListener('hrsd:survey-ready', ev => {
+      count(ev.detail && ev.detail.slug);
+    }, { once: true });
+  } else {
+    count(null);
+  }
 })();
