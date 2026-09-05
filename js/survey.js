@@ -476,6 +476,14 @@
   // ============================================================
   // التحميل
   // ============================================================
+  // مظهر الاستبيان: يُقرأ من سجلّه، والفاتح هو الافتراضي
+  function applyTheme(theme) {
+    const dark = theme === 'dark';
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', dark ? '#0a1211' : '#fafbfb');
+  }
+
   async function load() {
     const slug = new URLSearchParams(window.location.search).get('s');
 
@@ -497,6 +505,7 @@
       }
 
       survey = rows[0];
+      applyTheme(survey.theme);
       renderHeader();
 
       if (survey.status !== 'active') {

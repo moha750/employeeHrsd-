@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#0a1211">
+  <meta name="theme-color" content="#fafbfb">
   <title>باني الاستبيانات — لوحة الإدارة</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="إنشاء وتحرير استبيانات مشروع الرفاه الوظيفي">
-  <link rel="stylesheet" href="css/styles.css?v=20260905-dark">
+  <link rel="stylesheet" href="css/styles.css?v=20260905-2">
 </head>
 <body class="is-locked">
 
@@ -586,6 +585,15 @@
           <label class="form-label" for="sv-success">رسالة الشكر <span class="optional">(اختياري)</span></label>
           <input type="text" id="sv-success" class="form-input" maxlength="1000"
                  placeholder="تم استلام إجابتك بنجاح.">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="sv-theme">مظهر صفحة الاستبيان</label>
+          <select id="sv-theme" class="form-input form-select">
+            <option value="light">فاتح — الافتراضي</option>
+            <option value="dark">داكن</option>
+          </select>
+          <p class="form-hint">يخصّ هذا الاستبيان وحده؛ لا يؤثر على بقية الموقع.</p>
         </div>
 
         <div class="form-group">

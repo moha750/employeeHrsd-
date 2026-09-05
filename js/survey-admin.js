@@ -61,6 +61,7 @@
   const fDesc    = $('sv-desc');
   const fSuccess = $('sv-success');
   const fStatus  = $('sv-status');
+  const fTheme   = $('sv-theme');
   const linkPrev = $('sv-link-preview');
 
   const cardToggle = $('sv-card-enabled');
@@ -315,6 +316,7 @@
         title:           s.title + ' (نسخة)',
         description:     s.description,
         success_message: s.success_message,
+        theme:           s.theme === 'dark' ? 'dark' : 'light',
         status:          'draft'
       }).select().single();
       if (sErr) throw sErr;
@@ -401,7 +403,7 @@
 
     if (!id) {
       fTitle.value = ''; fSlug.value = ''; fDesc.value = '';
-      fSuccess.value = ''; fStatus.value = 'draft';
+      fSuccess.value = ''; fStatus.value = 'draft'; fTheme.value = 'light';
       editorMeta.textContent = 'استبيان جديد';
       editorWarn.hidden = true;
       renderQuestions();
@@ -442,6 +444,7 @@
       fDesc.value    = s.description || '';
       fSuccess.value = s.success_message || '';
       fStatus.value  = s.status;
+      fTheme.value   = s.theme === 'dark' ? 'dark' : 'light';
 
       editorMeta.textContent =
         state.responseCount.toLocaleString('ar-SA') + ' رد · أُنشئ ' + fmtDate(s.created_at);
@@ -827,6 +830,7 @@
         description:     fDesc.value.trim() || null,
         success_message: fSuccess.value.trim() || null,
         status:          fStatus.value,
+        theme:           fTheme.value === 'dark' ? 'dark' : 'light',
         card_enabled:    cardToggle.checked,
         card_config:     readCardConfig()
       };

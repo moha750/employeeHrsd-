@@ -38,6 +38,10 @@ create table if not exists public.surveys (
   -- رسالة شاشة الشكر بعد الإرسال
   success_message text check (length(success_message) <= 1000),
 
+  -- مظهر صفحة الاستبيان: الفاتح افتراضاً
+  theme       text not null default 'light'
+              check (theme in ('light', 'dark')),
+
   -- ميزة «البطاقة المهنية» اختيارية لكل استبيان
   card_enabled bool not null default false,
   -- يربط أدوار البطاقة بمعرّفات الأسئلة، مثال:

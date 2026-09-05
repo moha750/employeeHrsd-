@@ -46,37 +46,36 @@
   font-style: normal;
   font-display: swap;
 }
-:root {
-  /* الوضع الداكن هو الوضع الوحيد للموقع */
-  color-scheme: dark;
 
-  /* لوحة الألوان الأساسية (ألوان الهوية تبقى كما هي) */
-  --color-on-accent: #ffffff;   /* نص فوق الأزرار والألوان المميّزة */
+:root {
+  /* لوحة الألوان الأساسية */
+  --color-white: #ffffff;
+  --color-surface: var(--color-white);      /* أسطح البطاقات والحقول */
+  --color-on-accent: var(--color-white);   /* نص فوق الأزرار الملوّنة */
   --color-orange: #f59c00;
   --color-yellow: #ffce00;
   --color-teal: #00aa80;
 
-  /* درجات مشتقّة لتحقيق عمق بصري (مقلوبة للوضع الداكن) */
-  --color-teal-50:  #0e2320;   /* أخفت خلفية مائلة للأخضر */
-  --color-teal-100: #14352c;   /* خلفية/حدود ناعمة */
-  --color-teal-200: #1f5646;   /* حدود واضحة */
-  --color-teal-700: #5fd9b5;   /* نص أخضر ثانوي */
-  --color-teal-800: #8cebd1;   /* نص أخضر بارز */
-  --color-teal-grad: #007a5c;  /* الطرف الداكن لتدرّجات الأزرار */
-  --color-orange-50:  #2b1d06;
-  --color-orange-100: #402c0c;
-  --color-yellow-50:  #2a2206;
+  /* درجات مشتقّة لتحقيق عمق بصري */
+  --color-teal-50:  #f0faf6;
+  --color-teal-100: #d9f2e8;
+  --color-teal-200: #a8e1ce;
+  --color-teal-700: #007a5c;
+  --color-teal-800: #005840;
+  --color-teal-grad: var(--color-teal-700); /* الطرف الداكن في التدرّجات */
+  --color-orange-50:  #fff7e6;
+  --color-orange-100: #ffead0;
+  --color-yellow-50:  #fffaf0;
 
-  /* محايدات منضبطة (داكنة) */
-  --color-ink:        #f2f6f5;  /* أقوى نص */
-  --color-ink-soft:   #dae3e1;  /* نص المتن */
-  --color-muted:      #9aa8a5;
-  --color-muted-soft: #71807d;
-  --color-line:       #24312e;
-  --color-line-soft:  #1a2422;
-  --color-canvas:     #0a1211;  /* خلفية الصفحة */
-  --color-surface:    #111d1b;  /* خلفية البطاقات والحقول */
-  --color-toast-bg:   #1d2b28;
+  /* محايدات منضبطة */
+  --color-ink:        #0f1c1a;
+  --color-ink-soft:   #2a3937;
+  --color-muted:      #5a6b68;
+  --color-muted-soft: #8a9794;
+  --color-line:       #e7ecea;
+  --color-line-soft:  #f1f4f3;
+  --color-canvas:     #fafbfb;
+  --color-toast-bg:   var(--color-ink);
 
   /* تطبيقات الألوان */
   --color-primary: var(--color-teal);
@@ -94,22 +93,20 @@
   --color-error-bg: var(--color-orange-50);
   --color-success: var(--color-teal);
   --color-success-bg: var(--color-teal-50);
-  --color-danger:      #ff6b6b;
-  --color-danger-line: #5c2020;
 
-  /* ظلال متعدّدة الطبقات (معتمة أكثر لتناسب الخلفية الداكنة) */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.40);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40),
-               0 2px 4px rgba(0, 0, 0, 0.32);
-  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.40),
-               0 8px 16px -4px rgba(0, 0, 0, 0.46);
-  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.44),
-               0 16px 40px -8px rgba(0, 0, 0, 0.55),
-               0 1px 0 rgba(255, 255, 255, 0.05) inset;
-  --shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.48),
-               0 32px 64px -16px rgba(0, 0, 0, 0.62);
-  --shadow-focus: 0 0 0 4px rgba(0, 170, 128, 0.35);
-  --shadow-focus-warm: 0 0 0 4px rgba(245, 156, 0, 0.32);
+  /* ظلال متعدّدة الطبقات (تعطي إحساس عمق احترافي) */
+  --shadow-xs: 0 1px 2px rgba(15, 28, 26, 0.04);
+  --shadow-sm: 0 1px 2px rgba(15, 28, 26, 0.04),
+               0 2px 4px rgba(15, 28, 26, 0.03);
+  --shadow-md: 0 2px 4px rgba(15, 28, 26, 0.04),
+               0 8px 16px -4px rgba(15, 28, 26, 0.06);
+  --shadow-lg: 0 4px 8px rgba(15, 28, 26, 0.04),
+               0 16px 40px -8px rgba(15, 28, 26, 0.10),
+               0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  --shadow-xl: 0 8px 16px rgba(15, 28, 26, 0.05),
+               0 32px 64px -16px rgba(15, 28, 26, 0.14);
+  --shadow-focus: 0 0 0 4px rgba(0, 170, 128, 0.18);
+  --shadow-focus-warm: 0 0 0 4px rgba(245, 156, 0, 0.20);
 
   /* انحناءات دقيقة */
   --radius-xs: 6px;
@@ -155,8 +152,8 @@ html {
 body {
   font-family: var(--font-family);
   background:
-    radial-gradient(1200px 600px at 50% -200px, rgba(0, 170, 128, 0.14), transparent 60%),
-    radial-gradient(900px 500px at 100% 0%, rgba(245, 156, 0, 0.09), transparent 55%),
+    radial-gradient(1200px 600px at 50% -200px, rgba(0, 170, 128, 0.08), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(245, 156, 0, 0.05), transparent 55%),
     var(--color-canvas);
   color: var(--color-text);
   line-height: 1.75;
@@ -193,8 +190,8 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(ellipse 600px 280px at 18% 20%, rgba(255, 206, 0, 0.09), transparent 60%),
-    radial-gradient(ellipse 700px 320px at 82% 75%, rgba(0, 170, 128, 0.13), transparent 60%);
+    radial-gradient(ellipse 600px 280px at 18% 20%, rgba(255, 206, 0, 0.10), transparent 60%),
+    radial-gradient(ellipse 700px 320px at 82% 75%, rgba(0, 170, 128, 0.10), transparent 60%);
   pointer-events: none;
 }
 
@@ -420,7 +417,7 @@ body {
   border-radius: var(--radius-pill);
   font-size: 0.92rem;
   font-weight: 600;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 8px 24px rgba(15, 28, 26, 0.25);
   opacity: 0;
   transition: transform 0.4s var(--ease-spring),
               opacity 0.3s var(--ease-out);
@@ -440,7 +437,7 @@ body {
 }
 
 .toast--success {
-  background: var(--color-teal-grad);
+  background: var(--color-teal-800);
 }
 
 .toast--success svg {
@@ -630,7 +627,7 @@ body {
   font-size: 1rem;
   background: var(--color-surface);
   color: var(--color-ink);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28) inset;
+  box-shadow: 0 1px 2px rgba(15, 28, 26, 0.03) inset;
   transition: border-color var(--duration) var(--ease-out),
               box-shadow var(--duration) var(--ease-out),
               background-color var(--duration) var(--ease-out);
@@ -645,7 +642,7 @@ body {
   border-color: var(--color-teal);
   background: var(--color-surface);
   box-shadow: var(--shadow-focus),
-              0 1px 2px rgba(0, 0, 0, 0.28) inset;
+              0 1px 2px rgba(15, 28, 26, 0.03) inset;
 }
 
 .form-input::placeholder {
@@ -775,7 +772,7 @@ body {
 .form-select {
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa8a5' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235a6b68' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
   background-repeat: no-repeat;
   background-position: left var(--space-4) center;
   background-size: 18px;
@@ -1064,7 +1061,7 @@ body {
 
 .alert-error {
   background: var(--color-orange-50);
-  color: #f0b45c;
+  color: #8a4f00;
   border-color: var(--color-orange-100);
 }
 
@@ -1094,7 +1091,7 @@ body {
   border-radius: 50%;
   margin-bottom: var(--space-6);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
     0 8px 24px -6px rgba(0, 170, 128, 0.30);
   animation: successPop 0.6s var(--ease-spring);
 }
@@ -1332,8 +1329,8 @@ body.is-locked .login-screen {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle 280px at 30% 20%, rgba(0, 170, 128, 0.10), transparent 70%),
-    radial-gradient(circle 240px at 70% 80%, rgba(245, 156, 0, 0.08), transparent 70%);
+    radial-gradient(circle 280px at 30% 20%, rgba(0, 170, 128, 0.06), transparent 70%),
+    radial-gradient(circle 240px at 70% 80%, rgba(245, 156, 0, 0.05), transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -1359,7 +1356,7 @@ body.is-locked .login-screen {
   color: var(--color-teal);
   margin: 0 auto var(--space-4);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
     0 8px 20px -6px rgba(0, 170, 128, 0.25);
 }
 
@@ -1415,8 +1412,8 @@ body.is-locked .login-screen {
 .btn-logout {
   padding: 10px var(--space-5);
   background: var(--color-surface);
-  color: var(--color-danger);
-  border: 1.5px solid var(--color-danger-line);
+  color: #dc2626;
+  border: 1.5px solid #fecaca;
   border-radius: var(--radius-md);
   font-family: var(--font-family);
   font-size: 0.9rem;
@@ -1426,11 +1423,11 @@ body.is-locked .login-screen {
 }
 
 .btn-logout:hover {
-  background: var(--color-danger);
-  border-color: var(--color-danger);
+  background: #dc2626;
+  border-color: #dc2626;
   color: var(--color-on-accent);
   transform: translateY(-1px);
-  box-shadow: 0 6px 14px -4px rgba(255, 107, 107, 0.40);
+  box-shadow: 0 6px 14px -4px rgba(220, 38, 38, 0.40);
 }
 
 .btn-home {
@@ -1500,7 +1497,7 @@ body.is-locked .login-screen {
 .export-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.72);
+  background: rgba(15, 28, 26, 0.45);
   backdrop-filter: blur(2px);
   opacity: 0;
   transition: opacity var(--duration-slow) var(--ease-out);
@@ -1516,7 +1513,7 @@ body.is-locked .login-screen {
   max-height: calc(100vh - 2 * var(--space-4));
   background: var(--color-surface);
   border-radius: var(--radius-lg);
-  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 24px 60px -12px rgba(15, 28, 26, 0.3);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -2082,7 +2079,7 @@ body.is-locked .login-screen {
   font-size: 0.92rem;
   font-weight: 600;
   background: var(--color-surface)
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa8a5' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>")
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235a6b68' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>")
     no-repeat;
   background-position: left 12px center;
   background-size: 14px;
@@ -2447,7 +2444,7 @@ body.is-locked .login-screen {
 .drawer__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.72);
+  background: rgba(15, 28, 26, 0.45);
   backdrop-filter: blur(2px);
   opacity: 0;
   transition: opacity var(--duration-slow) var(--ease-out);
@@ -2464,7 +2461,7 @@ body.is-locked .login-screen {
   left: 0;
   width: min(520px, 100vw);
   background: var(--color-surface);
-  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.55);
+  box-shadow: 4px 0 32px rgba(15, 28, 26, 0.18);
   display: flex;
   flex-direction: column;
   transform: translateX(-100%);
@@ -2772,7 +2769,7 @@ body.is-locked .login-screen {
   padding: 8px 20px;
   background: var(--color-surface);
   border-bottom: 2px solid var(--color-teal);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   transform: translateY(-100%);
   transition: transform 0.35s ease;
   pointer-events: none;
@@ -2894,7 +2891,7 @@ body.is-locked .login-screen {
 .block-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.82);
+  background: rgba(15, 28, 26, 0.7);
   backdrop-filter: blur(4px);
   cursor: pointer;
 }
@@ -2965,7 +2962,7 @@ body.is-locked .login-screen {
 }
 
 .score-badge--high { background: var(--color-teal-50);  color: var(--color-teal-800); border-color: var(--color-teal-200); }
-.score-badge--mid  { background: var(--color-yellow-50); color: #e9c563;               border-color: #5c4a12; }
+.score-badge--mid  { background: var(--color-yellow-50); color: #8a6d00;               border-color: #f3d98a; }
 .score-badge--low  { background: var(--color-orange-50); color: var(--color-orange);   border-color: var(--color-orange-100); }
 .score-badge--na   { background: var(--color-line-soft); color: var(--color-muted);    border-color: var(--color-line); }
 
@@ -3218,12 +3215,12 @@ body.is-locked .login-screen {
   background:
     radial-gradient(520px 240px at 100% 0%, rgba(0, 170, 128, 0.10), transparent 60%),
     radial-gradient(420px 220px at 0% 100%, rgba(245, 156, 0, 0.08), transparent 60%),
-    var(--color-surface);
+    #ffffff;
   border: 1px solid var(--color-teal-100);
   border-radius: var(--radius-xl);
   box-shadow:
-    0 10px 30px -12px rgba(0, 0, 0, 0.60),
-    0 2px 8px rgba(0, 0, 0, 0.40);
+    0 10px 30px -12px rgba(15, 28, 26, 0.22),
+    0 2px 8px rgba(15, 28, 26, 0.06);
   overflow: hidden;
   text-align: right;
   position: relative;
@@ -3280,7 +3277,7 @@ body.is-locked .login-screen {
 .pro-card__ribbon {
   display: inline-block;
   background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-grad) 100%);
-  color: var(--color-on-accent);
+  color: #ffffff;
   font-size: 0.8rem;
   font-weight: 700;
   padding: 5px var(--space-4);
@@ -3366,7 +3363,7 @@ body.is-locked .login-screen {
 .pro-card__value {
   display: inline-block;
   background: var(--color-orange);
-  color: var(--color-on-accent);
+  color: #ffffff;
   font-size: 0.82rem;
   font-weight: 700;
   padding: 5px 12px;
@@ -3445,7 +3442,7 @@ body.is-locked .login-screen {
 
 .card-action--primary {
   background: var(--color-teal);
-  color: var(--color-on-accent);
+  color: #ffffff;
 }
 
 .card-action--primary:hover:not(:disabled) {
@@ -3456,7 +3453,7 @@ body.is-locked .login-screen {
 
 .card-action--wa {
   background: #25D366;
-  color: var(--color-on-accent);
+  color: #ffffff;
 }
 
 .card-action--wa:hover:not(:disabled) {
@@ -4131,70 +4128,146 @@ body.is-locked .login-screen {
 .card-actions button[hidden] { display: none !important; }
 
 /* ============================================================
-   ضبط عناصر المتصفح الأصلية للوضع الداكن
-   (الوضع الداكن هو الوضع الوحيد — لا يوجد وضع فاتح)
+   الوضع الداكن — طبقة اختيارية لكل استبيان على حدة
+   ------------------------------------------------------------
+   الوضع الفاتح هو الافتراضي للموقع كله. تُفعَّل هذه الطبقة فقط
+   حين تحمل <html> السمة data-theme="dark"، وتضبطها صفحة
+   الاستبيان بحسب الحقل theme في سجلّ الاستبيان.
    ============================================================ */
 
-html {
-  background: var(--color-canvas);
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* الأسطح والنص فوق الأزرار: دوران متعاكسان لرمز واحد سابقاً */
+  --color-surface:    #111d1b;
+  --color-on-accent:  #ffffff;
+
+  /* درجات مقلوبة: الفاتحة تصير أسطحاً، والداكنة تصير نصوصاً */
+  --color-teal-50:    #0e2320;
+  --color-teal-100:   #14352c;
+  --color-teal-200:   #1f5646;
+  --color-teal-700:   #5fd9b5;
+  --color-teal-800:   #8cebd1;
+  --color-teal-grad:  #007a5c;
+  --color-orange-50:  #2b1d06;
+  --color-orange-100: #402c0c;
+  --color-yellow-50:  #2a2206;
+
+  /* محايدات مقلوبة */
+  --color-ink:        #f2f6f5;
+  --color-ink-soft:   #dae3e1;
+  --color-muted:      #9aa8a5;
+  --color-muted-soft: #71807d;
+  --color-line:       #24312e;
+  --color-line-soft:  #1a2422;
+  --color-canvas:     #0a1211;
+  --color-toast-bg:   #1d2b28;
+
+  /* ظلال معتمة تناسب الخلفية الداكنة */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.40);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40),
+               0 2px 4px rgba(0, 0, 0, 0.32);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.40),
+               0 8px 16px -4px rgba(0, 0, 0, 0.46);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.44),
+               0 16px 40px -8px rgba(0, 0, 0, 0.55),
+               0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  --shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.48),
+               0 32px 64px -16px rgba(0, 0, 0, 0.62);
+  --shadow-focus: 0 0 0 4px rgba(0, 170, 128, 0.35);
+  --shadow-focus-warm: 0 0 0 4px rgba(245, 156, 0, 0.32);
 }
 
-/* قوائم <select> المنسدلة */
-.form-select option,
-select option {
+[data-theme="dark"] html,
+html[data-theme="dark"] { background: var(--color-canvas); }
+
+/* توهّجات الخلفية تحتاج شدّة أعلى لتُرى فوق الأسود */
+[data-theme="dark"] body {
+  background:
+    radial-gradient(1200px 600px at 50% -200px, rgba(0, 170, 128, 0.14), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(245, 156, 0, 0.09), transparent 55%),
+    var(--color-canvas);
+}
+
+[data-theme="dark"] .site-header::before {
+  background-image:
+    radial-gradient(ellipse 600px 280px at 18% 20%, rgba(255, 206, 0, 0.09), transparent 60%),
+    radial-gradient(ellipse 700px 320px at 82% 75%, rgba(0, 170, 128, 0.13), transparent 60%);
+}
+
+/* الظلال الصريحة داخل القواعد */
+[data-theme="dark"] .toast { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55); }
+[data-theme="dark"] .sticky-bar { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.55); }
+
+[data-theme="dark"] .form-input {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28) inset;
+}
+[data-theme="dark"] .form-input:focus {
+  box-shadow: var(--shadow-focus), 0 1px 2px rgba(0, 0, 0, 0.28) inset;
+}
+
+/* طبقات التعتيم خلف النوافذ المنبثقة */
+[data-theme="dark"] .drawer__backdrop,
+[data-theme="dark"] .export-modal__backdrop { background: rgba(0, 0, 0, 0.72); }
+
+/* سهم القوائم المنسدلة: صورة مضمّنة لا تقبل المتغيّرات */
+[data-theme="dark"] .form-select,
+[data-theme="dark"] .toolbar-select select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa8a5' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+}
+
+/* نصوص كانت داكنة فوق خلفيات ملوّنة ناعمة */
+[data-theme="dark"] .alert-error { color: #f0b45c; }
+[data-theme="dark"] .score-badge--mid { color: #e9c563; border-color: #5c4a12; }
+
+/* زر تسجيل الخروج */
+[data-theme="dark"] .btn-logout { color: #ff6b6b; border-color: #5c2020; }
+[data-theme="dark"] .btn-logout:hover {
+  background: #ff6b6b;
+  border-color: #ff6b6b;
+  color: #1a0e0e;
+  box-shadow: 0 6px 14px -4px rgba(255, 107, 107, 0.40);
+}
+
+/* شريط التنبيه الأخضر: النص أبيض فيجب أن تبقى الخلفية داكنة */
+[data-theme="dark"] .toast--success { background: var(--color-teal-grad); }
+
+/* خلفية البطاقة المهنية */
+[data-theme="dark"] .pro-card {
+  background:
+    radial-gradient(520px 240px at 100% 0%, rgba(0, 170, 128, 0.10), transparent 60%),
+    radial-gradient(420px 220px at 0% 100%, rgba(245, 156, 0, 0.08), transparent 60%),
+    var(--color-surface);
+  box-shadow:
+    0 10px 30px -12px rgba(0, 0, 0, 0.60),
+    0 2px 8px rgba(0, 0, 0, 0.40);
+}
+
+/* عناصر المتصفح الأصلية */
+[data-theme="dark"] select option {
   background-color: var(--color-surface);
   color: var(--color-ink);
 }
 
-/* منع كروم من طلاء الحقول المملوءة تلقائياً بالأبيض */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-select:-webkit-autofill {
+[data-theme="dark"] input:-webkit-autofill,
+[data-theme="dark"] input:-webkit-autofill:hover,
+[data-theme="dark"] input:-webkit-autofill:focus,
+[data-theme="dark"] textarea:-webkit-autofill {
   -webkit-text-fill-color: var(--color-ink);
   caret-color: var(--color-ink);
   -webkit-box-shadow: 0 0 0 1000px var(--color-surface) inset;
-  box-shadow: 0 0 0 1000px var(--color-surface) inset;
   transition: background-color 9999s ease-in-out 0s;
 }
 
-/* مؤشّر الكتابة وتحديد النص */
-input,
-textarea,
-select {
-  caret-color: var(--color-teal);
-}
-
-/* أشرطة التمرير */
-* {
+[data-theme="dark"] * {
   scrollbar-color: var(--color-teal-200) transparent;
   scrollbar-width: thin;
 }
-
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-line-soft);
-}
-
-::-webkit-scrollbar-thumb {
+[data-theme="dark"] ::-webkit-scrollbar { width: 10px; height: 10px; }
+[data-theme="dark"] ::-webkit-scrollbar-track { background: var(--color-line-soft); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
   background: var(--color-teal-200);
   border-radius: var(--radius-pill);
   border: 2px solid var(--color-line-soft);
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-teal-grad);
-}
-
-/* عناصر التحكم الأصلية تتبع لون الهوية */
-input[type="checkbox"],
-input[type="radio"],
-progress,
-input[type="range"] {
-  accent-color: var(--color-teal);
-}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: var(--color-teal-grad); }
