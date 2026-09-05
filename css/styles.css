@@ -223,6 +223,17 @@ body {
   margin-bottom: var(--space-5);
 }
 
+/* سطر الوحدة بين الشعار والبادجات */
+.unit-name {
+  position: relative;
+  margin: var(--space-5) auto var(--space-4);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  letter-spacing: 0.2px;
+  line-height: 1.6;
+}
+
 .initiative-name {
   display: inline-block;
   font-size: 0.78rem;
@@ -236,6 +247,9 @@ body {
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-xs);
 }
+
+/* display: inline-block أعلاه يتغلّب على سمة hidden، فنعالجها صراحةً */
+.initiative-name[hidden] { display: none; }
 
 .visitor-counter {
   display: inline-flex;

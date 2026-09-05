@@ -119,6 +119,10 @@
   // ============================================================
   // ترويسة الصفحة
   // ============================================================
+  // استثناءات فردية: استبيانات لا يظهر فيها بادج «مشروع الرفاه الوظيفي».
+  // أضف الـ slug هنا لإخفائه عن استبيان بعينه.
+  const NO_INITIATIVE_BADGE = ['mythaq-nltzm-lnrtqy'];
+
   function renderHeader() {
     // إبراز الكلمة الأخيرة من العنوان بلون التمييز — كما في التصميم الأصلي
     const words = survey.title.trim().split(/\s+/);
@@ -128,6 +132,10 @@
       '<span class="accent">' + escapeHtml(last) + '</span>';
 
     titleEl.hidden = false;
+
+    // بادج المبادرة يُخفى عن الاستبيانات المستثناة
+    const badge = document.getElementById('initiative-name');
+    if (badge) badge.hidden = NO_INITIATIVE_BADGE.includes(survey.slug);
 
     taglineEl.textContent = survey.description || '';
     taglineEl.hidden = !survey.description;
