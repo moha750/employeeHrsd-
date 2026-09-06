@@ -121,14 +121,22 @@
   // ============================================================
   // ترويسة الصفحة
   // ============================================================
-  // استثناءات فردية: استبيانات لا يظهر فيها بادج «مشروع الرفاه الوظيفي».
-  // أضف الـ slug هنا لإخفائه عن استبيان بعينه.
-  const NO_INITIATIVE_BADGE = ['mythaq-nltzm-lnrtqy'];
-
-  // استثناءات فردية: استبيانات لها صفحة مشاركة مستقلة تحمل وسوم og
-  // صحيحة، لأن زواحف واتساب وتليجرام لا تُشغّل JavaScript. نُعلنها
-  // في canonical فيلتقطها زرّ المشاركة بلا أن يعرف شيئاً عنها.
-  const SHARE_PAGES = { 'mythaq-nltzm-lnrtqy': 'mythaq.html' };
+  // ============================================================
+  // استثناءات فردية لاستبيانات بعينها — كلها في مكان واحد.
+  //   hideInitiativeBadge : إخفاء بادج «مشروع الرفاه الوظيفي»
+  //   hideFooterLine      : إخفاء سطر «فريق نصنع جونا — الرفاه الوظيفي»
+  //   sharePage           : صفحة مشاركة مستقلة تحمل وسوم og صحيحة،
+  //                         لأن زواحف واتساب لا تُشغّل JavaScript.
+  //                         تُعلَن في canonical فيلتقطها زرّ المشاركة
+  //                         بلا أن يعرف شيئاً عنها.
+  // ============================================================
+  const SURVEY_EXCEPTIONS = {
+    'mythaq-nltzm-lnrtqy': {
+      hideInitiativeBadge: true,
+      hideFooterLine:      true,
+      sharePage:           'mythaq.html'
+    }
+  };
 
   function renderHeader() {
     // إبراز الكلمة الأخيرة من العنوان بلون التمييز — كما في التصميم الأصلي
@@ -140,19 +148,22 @@
 
     titleEl.hidden = false;
 
-    // بادج المبادرة يُخفى عن الاستبيانات المستثناة
-    const badge = document.getElementById('initiative-name');
-    if (badge) badge.hidden = NO_INITIATIVE_BADGE.includes(survey.slug);
+    const ex = SURVEY_EXCEPTIONS[survey.slug] || {};
 
-    const sharePage = SHARE_PAGES[survey.slug];
-    if (sharePage) {
+    const badge = document.getElementById('initiative-name');
+    if (badge) badge.hidden = !!ex.hideInitiativeBadge;
+
+    const footerLine = document.querySelector('.site-footer .footer-line');
+    if (footerLine) footerLine.hidden = !!ex.hideFooterLine;
+
+    if (ex.sharePage) {
       let link = document.querySelector('link[rel="canonical"]');
       if (!link) {
         link = document.createElement('link');
         link.rel = 'canonical';
         document.head.appendChild(link);
       }
-      link.href = new URL(sharePage, window.location.href).href;
+      link.href = new URL(ex.sharePage, window.location.href).href;
     }
 
     taglineEl.textContent = survey.description || '';
