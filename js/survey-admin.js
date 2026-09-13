@@ -32,6 +32,20 @@
     closed: { label: 'مغلق',   cls: 'sv-badge--closed' }
   };
 
+  // زرّ الحالة في بطاقة الاستبيان: نقلة واحدة لكل حالة، بلا فتح المحرّر.
+  // (الحالات الثلاث تبقى كاملةً في قائمة «الحالة» داخل المحرّر.)
+  const STATUS_ACTION = {
+    draft:  { next: 'active', label: 'نشر',
+              confirm: s => 'نشر «' + s.title + '»؟ سيصبح رابطه مفتوحاً ويستقبل الردود.',
+              done: 'نُشر الاستبيان — الرابط يستقبل الردود الآن.' },
+    active: { next: 'closed', label: 'إغلاق',
+              confirm: s => 'إغلاق «' + s.title + '»؟ سيتوقف عن استقبال الردود، والردود المسجَّلة تبقى محفوظة.',
+              done: 'أُغلق الاستبيان — الردود محفوظة.' },
+    closed: { next: 'active', label: 'إعادة فتح',
+              confirm: s => 'إعادة فتح «' + s.title + '» لاستقبال الردود؟',
+              done: 'أُعيد فتح الاستبيان.' }
+  };
+
   // ===== عناصر DOM =====
   const $ = id => document.getElementById(id);
   const loginSection = $('login-section');
@@ -263,6 +277,9 @@
           '<span>' + fmtDate(s.created_at) + '</span>' +
         '</div>' +
         '<div class="sv-card__actions">' +
+          '<button type="button" data-act="status" class="is-primary">' +
+            esc((STATUS_ACTION[s.status] || STATUS_ACTION.draft).label) +
+          '</button>' +
           '<button type="button" data-act="edit">تحرير</button>' +
           '<button type="button" data-act="link">نسخ الرابط</button>' +
           '<button type="button" data-act="dup">تكرار</button>' +
@@ -280,12 +297,47 @@
     if (!s) return;
 
     switch (btn.dataset.act) {
-      case 'edit': return openEditor(s.id);
-      case 'link': return copyLink(s.slug);
-      case 'dup':  return duplicateSurvey(s);
-      case 'del':  return deleteSurvey(s);
+      case 'status': return toggleStatus(s, btn);
+      case 'edit':   return openEditor(s.id);
+      case 'link':   return copyLink(s.slug);
+      case 'dup':    return duplicateSurvey(s);
+      case 'del':    return deleteSurvey(s);
     }
   });
+
+  // نشر / إغلاق / إعادة فتح — بضغطة واحدة من البطاقة
+  async function toggleStatus(s, btn) {
+    const act = STATUS_ACTION[s.status] || STATUS_ACTION.draft;
+
+    // النشر بلا أسئلة يعطي زائراً صفحة فارغة
+    if (act.next === 'active' && s.counts.questions === 0) {
+      notify('error', 'لا يمكن نشر استبيان بلا أسئلة. أضف أسئلته أولاً.');
+      return;
+    }
+
+    if (!window.confirm(act.confirm(s))) return;
+    clearNotice();
+
+    const original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = '…';
+
+    try {
+      const { error } = await supabase
+        .from('surveys').update({ status: act.next }).eq('id', s.id);
+      if (error) throw error;
+
+      await loadSurveys();
+      notify('success', act.next === 'active'
+        ? act.done + ' ' + publicLink(s.slug)
+        : act.done);
+    } catch (err) {
+      console.error(err);
+      btn.disabled = false;
+      btn.textContent = original;
+      notify('error', 'تعذّر تغيير الحالة: ' + (err.message || ''));
+    }
+  }
 
   async function copyLink(slug) {
     const url = publicLink(slug);

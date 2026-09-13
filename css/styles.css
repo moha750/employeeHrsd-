@@ -3735,6 +3735,23 @@ body.is-locked .login-screen {
   color: var(--color-on-accent);
 }
 
+/* زرّ الحالة (نشر / إغلاق / إعادة فتح) — الإجراء الأبرز في البطاقة */
+.sv-card__actions button.is-primary {
+  color: var(--color-on-accent);
+  background: var(--color-teal);
+  border-color: var(--color-teal);
+}
+
+.sv-card__actions button.is-primary:hover {
+  background: var(--color-teal-800);
+  border-color: var(--color-teal-800);
+}
+
+.sv-card__actions button.is-primary:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 .sv-card__actions button.is-danger {
   color: var(--color-error);
   background: var(--color-error-bg);
