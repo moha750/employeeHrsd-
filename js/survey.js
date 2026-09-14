@@ -123,7 +123,11 @@
   // ============================================================
   // ============================================================
   // استثناءات فردية لاستبيانات بعينها — كلها في مكان واحد.
-  //   hideInitiativeBadge : إخفاء بادج «مشروع الرفاه الوظيفي»
+  //   hideUnitName        : إخفاء سطر «الموارد البشرية - وحدة الحضور
+  //                         والانصراف» — يخصّ استبيانات الوحدة وحدها
+  //   initiativeName      : نصّ بديل لبادج المشروع، حين ينتمي
+  //                         الاستبيان إلى مشروع غير «الرفاه الوظيفي»
+  //   hideInitiativeBadge : إخفاء بادج المشروع كلياً
   //   hideFooterLine      : إخفاء سطر «فريق نصنع جونا — الرفاه الوظيفي»
   //   sharePage           : صفحة مشاركة مستقلة تحمل وسوم og صحيحة،
   //                         لأن زواحف واتساب لا تُشغّل JavaScript.
@@ -135,6 +139,10 @@
       hideInitiativeBadge: true,
       hideFooterLine:      true,
       sharePage:           'mythaq.html'
+    },
+    'tajrubati-baadi-2026': {
+      hideUnitName:   true,
+      initiativeName: 'مشروع تجربتي الوظيفية'
     }
   };
 
@@ -150,8 +158,14 @@
 
     const ex = SURVEY_EXCEPTIONS[survey.slug] || {};
 
+    const unitLine = document.querySelector('.site-header .unit-name');
+    if (unitLine) unitLine.hidden = !!ex.hideUnitName;
+
     const badge = document.getElementById('initiative-name');
-    if (badge) badge.hidden = !!ex.hideInitiativeBadge;
+    if (badge) {
+      if (ex.initiativeName) badge.textContent = ex.initiativeName;
+      badge.hidden = !!ex.hideInitiativeBadge;
+    }
 
     const footerLine = document.querySelector('.site-footer .footer-line');
     if (footerLine) footerLine.hidden = !!ex.hideFooterLine;
